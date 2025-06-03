@@ -1,0 +1,35 @@
+Base Case :
+  --> to make the mountain , min 3 points are required (left , peak , right )
+
+Approach :
+  1 : We will find the peak element 
+  2 : then , we will traverse left from the peak to fing , from where the mountain is start (left -- )
+  3: after that , we will traverse right from the peak , to find out where the mountain ends (right ++)
+  4 : at last , we will find out the maximun lenght by :  (right - left + 1) // adding 1 for peak of the mountain
+
+TimeComplexity :  O(n) --> traversion th whole array 
+SpaceComplexity : O(1) --> not using any extra space
+
+
+class Solution {
+    public int longestMountain(int[] arr) {
+        if (arr.length < 3) {
+            return 0;
+        }
+        int longest = 0;
+        for (int i = 1; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {  // finding the peak of the mountain
+                int left = i;
+                int right = i;
+                while (left > 0 && arr[left - 1] < arr[left]) { // traversing left from peak
+                    left--;
+                }
+                while (right < arr.length - 1 && arr[right + 1] < arr[right]) { // traversing right from peak
+                    right++;
+                }
+                longest = Math.max(right - left + 1, longest);  // calculating the maximum length
+            }
+        }
+        return longest;
+    }
+}
