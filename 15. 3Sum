@@ -1,0 +1,106 @@
+1st Method : Brute Force Approach (Show TLE on LeetCode)
+
+TimeComplexity : O(n3) 
+SpaceComplexity : O(n)
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Set<List<Integer>> set = new HashSet<>();
+        int n = nums.length;
+
+        for(int i = 0; i < n - 2; i++) {
+            for(int j = i + 1; j < n - 1; j++) {
+                for(int k = j + 1; k < n; k++) {
+                    if(nums[i] + nums[j] + nums[k] == 0) {
+                        List<Integer> triplet = Arrays.asList(nums[i], nums[j], nums[k]);
+                        Collections.sort(triplet); // sort to handle uniqueness
+                        set.add(triplet);
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(set);
+    }
+}
+
+2nd Method :  Using Two Pointers 
+
+Approach :
+  1 : Sort the array.
+  2 : Fix one number (nums[i]) and find two others (left & right ) using two-pointer technique.
+  3 : Use a Set to handle duplicates.
+
+TimeComplexity : O(n2)
+SpaceComplexity : O(n)
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        Set<List<Integer>> result = new HashSet<>();
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == 0) {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+                } else if (sum < 0) { // if the sum is -ve , then move towards larger element (left++) , because array is sort
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+
+        return new ArrayList<>(result);
+    }
+}
+
+3rd Method : No Set, Skip Duplicates
+
+Approach :
+  1 : Sort the array.
+  2 : Fix one number, use two-pointer for the rest.
+  3 : Skip duplicates using conditions — no need for a Set.
+
+TimeComplexity : O(n2)
+SpaceComplexity : O(1) // Because , this is using Auxilary Space
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue; // skip duplicate i
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == 0) {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+
+                    // skip duplicates on left and right
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    while (left < right && nums[right] == nums[right + 1]) right--;
+                }
+                else if (sum < 0) left++;
+                else right--;
+            }
+        }
+
+        return result;
+    }
+}
+
+
