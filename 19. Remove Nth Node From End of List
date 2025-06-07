@@ -1,0 +1,36 @@
+Approach(Iterative) :
+  1 : we have to delete nth node from the end, but the problem is that , we cannot calulate nth node from the end 
+      but we can calculate the nth node from start  through this logic (size-n+1) , this logic give the same element that we are looking for 
+  2 : for implementing that logic , we have to calculate the size of the linked list first 
+  3 : then we will delete node from the end , (prev.next = prev.next.next)
+
+TimeComplexity : O(n)
+SpaceComplexity : O(1)
+
+lass Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        int size = 0;
+        ListNode temp = head;
+        while (temp != null) {
+            temp = temp.next;
+            size++;
+        }
+
+        if (n == size) {
+            head = head.next;
+            return head;
+        }
+
+        int i = 1;
+        int iToFind = size - n;
+        ListNode prev = head;
+
+        while (i < iToFind) {
+            prev = prev.next;
+            i++;
+        }
+
+        prev.next = prev.next.next;
+        return head;
+    }
+}
