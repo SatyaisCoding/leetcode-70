@@ -1,0 +1,51 @@
+Approach :
+  1 : So here we are suing fast ans slow algo, in this algo if (fast!=null -> even ) and (fast.next!=null -> odd)
+  2 : above operation that we have done , is to find the mid 
+  3 :  we have to reverse the 2nd half elem 
+  4 : at last , we will check if 1st half = 2nd half 
+
+TimeComplexity :  O(n)
+SpaceComplexity : O(n)
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null){
+            return true;
+        }
+
+        ListNode midNode = findMid(head);
+
+        // reverse 2nd half;
+
+        ListNode prev = null;
+        ListNode curr = midNode;
+        ListNode next;
+
+        while(curr!=null){
+            next = curr.next;
+            curr.next= prev;
+            prev = curr;
+            curr=next;
+        }
+        ListNode right = prev;
+        ListNode left = head;
+
+        while(right!=null){     // checking 1st half and 2nd half
+            if(left.val !=right.val){
+                return false;
+            }
+            left= left.next;
+            right= right.next;
+        }
+        return true;
+    }
+    public ListNode findMid(ListNode head){
+        ListNode slow = head ,fast=head;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+
+        }
+        return slow;  // midNode
+    }
+}
