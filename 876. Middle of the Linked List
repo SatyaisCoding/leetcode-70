@@ -1,0 +1,21 @@
+Approach :
+  1 :  We will use fast and slow algorithm
+  2 :  In this algorithm , the slow will goes forward into 1 step and fast will be into 2 step 
+  3 : We will traverse throught out the list until fast.next != null(for odd) and fast!=null and you will see that , the slow pointer auto reached to the mid of the linked list
+
+TimeComplexity : O(n)
+SpaceComplexity : O(1)
+
+
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
