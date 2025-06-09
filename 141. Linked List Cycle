@@ -1,0 +1,24 @@
+Approach : 
+  1 : We will use fast and slow concept  also known as Floyd's Algorith of finding cycle in the Linked List
+  2 : we will check if slow == fast , then cycle exist otherwise don't 
+
+TimeComplexity : O(n)
+SpaceComplexity : O(1)
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast!=null && fast.next!=null){
+            slow = slow.next ;
+            fast = fast.next.next;
+
+            if(slow == fast){
+                return true;
+            }
+        }
+        return false;
+        
+    }
+}
