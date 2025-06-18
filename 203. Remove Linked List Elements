@@ -1,0 +1,32 @@
+Approach : 
+  1 : traverse to the right before val , then make the tem.next = temp.next.next
+  2 : if head = nuill return head;
+  3 : if head.val = val , then remove the head by returning head.next 
+
+TimeComplexity : O(n) --> traversion the whle LL to find the val
+SpaceComplexity : O(1) -> No extra space is used
+
+
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        if( head == null ){
+            return head;
+        }
+        
+        ListNode temp = head;
+         while(temp.next!=null){
+            if(temp.next.val == val){
+                temp.next = temp.next.next;
+            }
+            else{
+                temp = temp.next;
+            }
+
+         }
+         if( head.val == val ){
+            return head.next;
+        }
+         return head;
+        
+    }
+}
