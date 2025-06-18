@@ -1,0 +1,26 @@
+Approach :
+  1 : Use 3 pointer , prev, curr, and next , reverse the pointer and then move all the 3 pointer a step ahead , do the same while (curr!=null)
+
+TimeComplexity :  O(n) -> traversing the whole linked list at once
+SpaceComplexity: O(1) -> not using any extra space
+
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode next;
+        while(curr!=null){
+            next= curr.next;  // this line assign the next of curr.next
+            curr.next = prev;   // this line is making the reverse 
+            prev = curr; // making the +1
+            curr= next; // +1 making 
+        }
+        head = prev;
+        return head; return the LL
+        
+    }
+}
