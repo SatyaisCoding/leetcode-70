@@ -1,0 +1,72 @@
+1st Approach : (Total Sum - Actual Sum)
+  1 : Find the toatal tum of the number up to n
+  2 :  Subs the sum of the array from the Total sum of the number up to n
+
+TimeCOmplexity : O(n)
+SpaceComplexity : O(1)
+
+class Solution {
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+        int Tsum  = (0+n)*(n+1)/2;
+        int actSum = Arrays.stream(nums).sum();
+
+        return Tsum - actSum;
+    }
+}
+
+**************************************************************************************
+
+2nd Approach : 2 -  Pointer 
+  1 : point to a elem and traverse 2nd pointer and cros check the elem 
+  2 : return idx where the number is missing (found false)
+
+TimeComplexity :  O(n)
+SpaceCOmplexity :O(1)
+
+class Solution {
+    public int missingNumber(int[] nums) {
+       
+        for(int i=0;i<nums.length+1;i++){
+             boolean found = false;
+            for(int j=0;j<nums.length;j++){
+                if(nums[j]==i){
+                    found = true;
+                    break;
+                }
+            }
+            if(found == false){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+**************************************************************************************
+
+3rd Approach : Using XOR Operator
+  1:  In this method , XOR with each emelm itself 
+  2 : Traverse a loop to the n , and then xor with elem up to n , return the  missing elem 
+
+TimeComplexity : O(n) but quite fast , because xor handle the the calculations in the binary form 
+SpcaeComplexity : O(1)
+
+class Solution {
+    public int missingNumber(int[] nums) {
+       
+        for(int i=0;i<nums.length+1;i++){
+             boolean found = false;
+            for(int j=0;j<nums.length;j++){
+                if(nums[j]==i){
+                    found = true;
+                    break;
+                }
+            }
+            if(found == false){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
