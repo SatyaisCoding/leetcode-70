@@ -1,0 +1,24 @@
+Approach : Recursion
+  1 :  Pop all the element until the stk is empty;
+  2 : If the stk is empty, then push the data;
+  3 :  then push back again all the poped data;
+
+TimeComplexity : O(n)
+SpaceComplexity : O(n)  -> Stack is used
+
+// User function Template for Java
+class Solution {
+    public Stack<Integer> insertAtBottom(Stack<Integer> st, int x) {
+        pushAtBottom(st,x);
+        return st;
+    }
+    public void pushAtBottom(Stack<Integer> s, int data){
+        if(s.isEmpty()){
+            s.push(data);
+            return;
+        }
+        int top = s.pop();
+        pushAtBottom(s,data);
+        s.push(top);
+    }
+}
