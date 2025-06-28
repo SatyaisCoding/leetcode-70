@@ -1,0 +1,22 @@
+Approach : Stack 
+  1 : push all the char in the stack at particular idx 
+  2 : pop all the elem and put again into char[]
+
+TimeComplexity: O(n)
+SpaceComplexity : O(n)
+
+class Solution {
+    public char[] reverseString(char[] str) {
+        Stack<Character> s = new Stack<>();
+        int idx =0;
+        while(idx<str.length){
+            s.push(str[idx]);
+            idx++;
+        }
+        for(int i=0;i<str.length;i++){
+            str[i] = s.pop();
+        }
+        return str;
+        
+    }
+}
