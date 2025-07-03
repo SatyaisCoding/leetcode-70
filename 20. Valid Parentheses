@@ -39,3 +39,39 @@ class Solution {
         
     }
 }
+
+******************************************************************************************
+
+2nd Approach :
+  1 :  Traverse the string , add the closing braces in the stack 
+  2 :  then pop the braces when open bracket of found , otherweise leave it 
+
+TimeCOmplexity : O(n)
+SpacerComplaxity : O(n)
+
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stk = new Stack<>();
+        for(char c : s.toCharArray() ){
+            if(c == '('){
+                stk.push(')');
+            }else if( c == '{'){
+                stk.push('}');
+            }
+            else if(c == '['){
+                stk.push(']');
+            }
+            else if(stk.isEmpty() || stk.pop() != c){
+                return false;
+            }
+            
+        }
+        return stk.isEmpty();
+        }
+}
+
+
+
+
+
