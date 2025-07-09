@@ -1,0 +1,35 @@
+Approach  : Using Stack 
+  1 : Iterate through the input tokens -> If the token is an operator (+, -, *, /):
+  2 : Pop the top 2 numbers from the stack.
+      Apply the operator (note: the 1st popped number is the 2nd operand).
+      Push the result back onto the stack.
+  3 : If the token is a number, parse it to an integer and push it onto the stack.
+  4 : After processing all tokens, the result is the only value left on the stack, so return it.
+
+TimeComplexit : O(n)
+SpaceComplexity : O(n)
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stk = new Stack<>();
+
+        for(String token:tokens){
+            if(token.equals("+")||token.equals("-")||token.equals("*")||token.equals("/")){
+                int num2 = stk.pop();
+                int num1 = stk.pop();
+
+                switch(token){
+                    case "+" : stk.push(num1+num2); break;
+                    case "-" : stk.push(num1-num2); break;
+                    case "/" : stk.push(num1/num2); break;
+                    case "*" : stk.push(num1*num2); break;
+                }
+            }else{
+                stk.push(Integer.parseInt(token));
+            }
+
+        }
+        return stk.peek();
+        
+    }
+}
