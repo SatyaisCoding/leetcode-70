@@ -1,0 +1,61 @@
+Approach : Using Recursion
+1 : Use Recursion to Sort the Stack:
+    Remove (pop) the top element from the stack.
+    Recursively sort the remaining stack.
+    Insert the removed element back in the correct sorted position.
+2 : Use a Helper Function (sortedInsert) to Insert Correctly:
+    If the stack is empty or the top is smaller than the number, just push it.
+    Otherwise, pop elements until the right position is found, then insert and push back the popped elements.
+
+TimeComplexity : O(n2)
+SpaceCOmplexity: O(n)
+
+
+import java.util.Stack;
+
+public class Main {
+    public static void main(String args[]) {
+        Stack<Integer> input = new Stack<Integer>();
+        input.add(34);
+        input.add(3);
+        input.add(31);
+        input.add(98);
+        input.add(92);
+        input.add(23);
+
+        // Sort the stack
+        sortStack(input);
+
+        // Print sorted stack
+        while (!input.isEmpty()) {
+            System.out.print(input.pop() + " ");
+        }
+    }
+
+    // Recursive function to sort the stack
+    public static void sortStack(Stack<Integer> stk) {
+        if (stk.isEmpty()) {
+            return;
+        }
+
+        int num = stk.pop();
+
+        // Recursively sort the remaining stack
+        sortStack(stk);
+
+        // Insert the popped element in the sorted stack
+        insertSorted(stk, num);
+    }
+
+    // Helper function to insert an element in a sorted stack
+    public static void insertSorted(Stack<Integer> s, int num) {
+        if (s.isEmpty() || s.peek() >= num) {
+            s.push(num);
+            return;
+        }
+
+        int top = s.pop();
+        insertSorted(s, num);
+        s.push(top);
+    }
+}
