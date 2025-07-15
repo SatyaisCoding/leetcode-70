@@ -1,0 +1,54 @@
+Approach : Using Auxilaryu Array 
+  1 : Fill the 0 in every idx in Aux(temp) array 
+  2 : Add the element from nums at the same idx in the temp array (temp[nums[i]] = nums[i])
+  3 : the disappear elem has zero at its place --> store those dissapear in the result AL and return them 
+
+TimeComplexity : O(n)
+SpaceComplexity : O(n)
+
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        int[] temp  = new int[nums.length+1];
+
+        Arrays.fill(temp, 0);
+
+        for(int i=0;i<nums.length;i++){
+            temp[nums[i]] = nums[i];      // this is the most imp line of this code 
+        }
+
+        List<Integer> result  = new ArrayList<>(temp.length);
+
+        for(int i = 1 ;i< temp.length;i++){
+            if(temp[i]==0){
+                result.add(i);
+            }
+        }
+
+        return result;
+        
+    }
+}
+
+*********************************************************************************************
+
+Approach 2nd : Using HashSet
+  1 :  remove duplicate andf store at idx in HashSet
+  2 : if the set does not contain , then add it into result and return it 
+
+TimeComplexity : O(n)
+SpaceComplexity : O(n)
+
+
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] a) {
+        Set<Integer> set = new HashSet<>();
+        ArrayList<Integer> result = new ArrayList<>();
+
+        for (int i : a) set.add(i); // removing duplicate elements
+
+       for(int i = 1; i <= a.length; i++){
+           if(!set.contains(i)) result.add(i);
+       }
+        return result;
+    }
+}
